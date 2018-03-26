@@ -1,5 +1,10 @@
-// Helper function for getting params out of urls, most commonly
-// window.href.location
+/**
+ * Helper function for getting params out of urls, most commonly
+ * window.href.location
+ *
+ * @NApiVersion 2.0
+ */
+
 define([], function() {
 
   var mockedURL = null;
