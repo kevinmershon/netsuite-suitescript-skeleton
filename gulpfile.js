@@ -21,11 +21,9 @@ gulp.task('watch-tests', watchMocha);
 
 
 // NetSuite build tasks
-const uploadToNetsuite = require('netsuite-deploy/lib/index.js');
 const netsuiteSettings = require('./package.json').netsuite;
 const credentials      = require('./credentials');
 
-const keepass          = require('keepass-http-client');
 const merge            = require('merge-stream');
 const gulpUtil         = require('gulp-util');
 const changed          = require('gulp-changed');
@@ -47,11 +45,11 @@ gulp.task('build', () => {
   );
 });
 
-function deploy(environment) {
+function deploy(environment, done) {
   // Even if there are no results, will still be an empty 'all'
-  if (Object.keys(filenames.get('all')).length === 0) {
+  if (Object.keys(filenames.get('all')).length === 1) {
     gulpUtil.log(gulpUtil.colors.red('No files to deploy!'));
-    return;
+    return done();
   }
 
   let config = filenames.get('objects').length
@@ -64,14 +62,12 @@ function deploy(environment) {
         base: `${__dirname}/dist/FileCabinet/${netsuiteSettings.folder}/`,
       });
 
-  return uploadToNetsuite(config);
+  const uploadToNetsuite = require('netsuite-deploy/lib/index.js');
+  return uploadToNetsuite(config).then(() => {
+    done();
+    process.exit(0);
+  });
 }
 
-gulp.task('deploy-sandbox',
-  gulp.series(
-    ['build'],
-    () => {
-      return deploy('sandbox');
-    }
-  )
-);
+gulp.task('deploy-sandbox',    gulp.series(['build'], (done) => { return deploy('sandbox',    done); }));
+gulp.task('deploy-production', gulp.series(['build'], (done) => { return deploy('production', done); }));
