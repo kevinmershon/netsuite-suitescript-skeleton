@@ -27,7 +27,7 @@ the NetSuite account you are attempting to deploy to.
   and fill in all other appropriate values for `role`, `email`, and `password`.
 4. Add your user account as an authorized user of the Web Services API, similar to this:
 
-  ![Web Services Configuration](blob/master/doc/web_services_config_example.png)
+  ![Web Services Configuration](doc/web_services_config_example.png)
 
 Deploying
 --
