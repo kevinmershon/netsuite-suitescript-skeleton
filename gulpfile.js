@@ -21,7 +21,6 @@ gulp.task('watch-tests', watchMocha);
 
 
 // NetSuite build tasks
-const netsuiteSettings = require('./package.json').netsuite;
 const credentials      = require('./credentials');
 
 const merge            = require('merge-stream');
@@ -34,7 +33,7 @@ gulp.task('clean', () => {
   return del('dist/');
 });
 gulp.task('build', () => {
-  const scriptDest = `dist/FileCabinet/${netsuiteSettings.folder}/`;
+  const scriptDest = `dist/FileCabinet/${credentials.folder}/`;
   filenames.forget('all');
   return merge(
     gulp
@@ -52,14 +51,15 @@ function deploy(environment, done) {
     return done();
   }
 
+  var envCred = credentials[environment];
   let config = filenames.get('objects').length
-    ? Object.assign(credentials, { environment, method: 'sdf', file: 'dist\\' })
-    : Object.assign(credentials, {
+    ? Object.assign(envCred, { environment, method: 'sdf', file: 'dist\\' })
+    : Object.assign(envCred, {
         environment,
         method: 'suitetalk',
         file: filenames.get('files', 'full'),
-        path: netsuiteSettings.folder,
-        base: `${__dirname}/dist/FileCabinet/${netsuiteSettings.folder}/`,
+        path: credentials.folder,
+        base: `${__dirname}/dist/FileCabinet/${credentials.folder}/`,
       });
 
   const uploadToNetsuite = require('netsuite-deploy/lib/index.js');

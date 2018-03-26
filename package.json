@@ -24,9 +24,5 @@
     "test": "mocha"
   },
   "author": "Kevin Mershon",
-  "license": "AGPLv3",
-  "netsuite": {
-    "folder": "SuiteScripts/kmershon_test",
-    "testurl": "sandbox"
-  }
+  "license": "AGPLv3"
 }
