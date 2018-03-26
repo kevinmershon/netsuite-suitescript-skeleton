@@ -7,3 +7,9 @@ node_modules
 
 # Tags
 .tags
+
+# Binaries
+dist/*
+
+# Sensitive file
+credentials.json
