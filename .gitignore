@@ -1,0 +1,9 @@
+# Node
+node_modules
+
+# Vim swapfiles
+*.swp
+*.swo
+
+# Tags
+.tags

@@ -1,0 +1,21 @@
+{
+  "name": "suitescript-skeleton",
+  "version": "1.0.0",
+  "description": "NetSuite SuiteScript Skeleton",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "gulp": "^4.0.0",
+    "gulp-mocha": "^5.0.0",
+    "gulplog": "^1.0.0",
+    "netsumo": "^3.3.1"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Kevin Mershon",
+  "license": "AGPLv3"
+}
