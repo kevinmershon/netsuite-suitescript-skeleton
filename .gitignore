@@ -13,3 +13,4 @@ dist/*
 
 # Sensitive file
 credentials.json
+.deploycache
