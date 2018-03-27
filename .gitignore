@@ -1,5 +1,11 @@
 # Node
 node_modules
+yarn-error.log
+
+# OS Garbage
+.DS_Store
+Thumbs.db
+Desktop.ini
 
 # Vim swapfiles
 *.swp

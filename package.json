@@ -9,7 +9,7 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "del": "^3.0.0",
-    "gulp": "^4.0.0",
+    "gulp": "4.0.0",
     "gulp-changed": "^3.2.0",
     "gulp-filenames": "^4.0.1",
     "gulp-minify": "^2.1.0",

@@ -7,7 +7,7 @@ Dependencies
 
 Installation
 --
-`npm install -g mocha && npm install`
+`npm install -g mocha yarn && yarn install`
 
 Developing
 --

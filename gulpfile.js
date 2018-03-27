@@ -30,6 +30,7 @@ const filenames        = require('gulp-filenames');
 const del              = require('del');
 
 gulp.task('clean', () => {
+  del(".deploycache"); // wipe the Netsuite deploy cache
   return del('dist/');
 });
 gulp.task('build', () => {
