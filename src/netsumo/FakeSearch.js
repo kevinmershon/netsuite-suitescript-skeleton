@@ -42,12 +42,27 @@ module.exports = (function() {
     WITHIN:                  'within'
   };
 
+  var mockedResults = [];
+  function mockResults(results) {
+    mockedResults = results;
+  }
+
   function newSearch() {
     const search = {
       id: Math.floor(Math.random() * 10000),
       columns: [],
       filters: [],
-      run: function() { /* no-op */ }
+      run: function() {
+        return {
+          length: mockedResults.length,
+          each: function(callback) {
+            for (var i=0; i<mockedResults.length; i++) {
+              callback(mockedResults[i]);
+            }
+          }
+        };
+      },
+
     };
     return search;
   }
@@ -69,10 +84,11 @@ module.exports = (function() {
   };
 
   return {
-    Operator: operators,
-    load:    load,
+    Operator:     operators,
+    load:         load,
     createColumn: function(opts) { return null; },
     createFilter: function(opts) { return null; },
+    mockResults:  mockResults
   };
 
 })();
