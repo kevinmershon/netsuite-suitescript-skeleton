@@ -1,6 +1,5 @@
 const { expect } = require('Chai');
-const { loadSuiteScriptModule, NRecord } = require('netsumo');
-const FakeLog = require('../../../../src/netsumo/FakeLog.js');
+const { loadSuiteScriptModule, NRecord, NLog } = require('netsumo');
 
 const SlackModule = loadSuiteScriptModule('src/js/util/client/Slack.js');
 const request = require('request');
@@ -23,7 +22,7 @@ describe("Slack post", function() {
   it("should require a URL", function() {
     const slack = SlackModule({
       'N/https': fakeHttps,
-      'N/log': FakeLog
+      'N/log': new NLog()
     });
     const response = slack.post({
       message: "Hello World!"
@@ -35,7 +34,7 @@ describe("Slack post", function() {
   it("should require a Message", function() {
     const slack = SlackModule({
       'N/https': fakeHttps,
-      'N/log': FakeLog
+      'N/log': new NLog()
     });
     const response = slack.post({
       url: "https://testing-123.com",
@@ -47,7 +46,7 @@ describe("Slack post", function() {
   it("should return success true when posting message to url", function() {
     const slack = SlackModule({
       'N/https': fakeHttps,
-      'N/log': FakeLog
+      'N/log': new NLog()
     });
     const response = slack.post({
       url: "https://testing-123.com",

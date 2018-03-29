@@ -2276,9 +2276,9 @@ netsuite-suitetalk-wsdl-v2016-2.0@^0.1.5:
   dependencies:
     soap "0.19.0"
 
-netsumo@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/netsumo/-/netsumo-3.3.1.tgz#434fd4c819430982768ccc2e0ede87d97b6a6bc3"
+"netsumo@https://github.com/kevinmershon/netsumo#feature-ss2-extensions":
+  version "3.3.0"
+  resolved "https://github.com/kevinmershon/netsumo#1471a71e3d3f10c4f4631c18eebe5a6cb9dfa14a"
   dependencies:
     clone "^1.0.2"
     nodemailer "^2.1.0"

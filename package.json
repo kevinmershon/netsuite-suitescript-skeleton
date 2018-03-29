@@ -18,7 +18,7 @@
     "gulplog": "^1.0.0",
     "merge-stream": "^1.0.1",
     "netsuite-deploy": "github:michoelchaikin/netsuite-deploy",
-    "netsumo": "^3.3.1"
+    "netsumo": "https://github.com/kevinmershon/netsumo#feature-ss2-extensions"
   },
   "scripts": {
     "test": "mocha"
