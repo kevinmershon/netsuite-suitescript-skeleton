@@ -75,6 +75,7 @@ module.exports = (function() {
     if (opts.filters) {
       filters = opts.filters;
     }
+    return search;
   }
 
   function load(opts) {
@@ -86,6 +87,7 @@ module.exports = (function() {
   return {
     Operator:     operators,
     load:         load,
+    create:       create,
     createColumn: function(opts) { return null; },
     createFilter: function(opts) { return null; },
     mockResults:  mockResults
