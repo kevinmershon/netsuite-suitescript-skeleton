@@ -15,6 +15,7 @@ const watchMocha = function() {
   gulp.watch(['lib/**', 'src/**', 'test/**'], gulp.series('mocha'));
 }
 gulp.task('watch-tests', watchMocha);
+gulp.task('test', gulp.series('mocha'));
 
 
 
