@@ -25,13 +25,15 @@ the NetSuite account you are attempting to deploy to.
 2. Go to `Setup > Integration > Web Services Preferences` in your NetSuite account.
 3. Copy the `ACCOUNT ID` value to your `credentials.json` file under `account`,
   and fill in all other appropriate values for `role`, `email`, and `password`.
-4. Add your user account as an authorized user of the Web Services API, similar to this:
+4. If your account sandbox is newer and not hosted at the sandbox.netsuite
+  subdomain, run the following command:
 
-  ![Web Services Configuration](doc/web_services_config_example.png)
+   `./util/use_top_level_sandbox.py`
 
 Deploying
 --
 Run the command `gulp deploy-sandbox` to deploy to your Sandbox account.
+Run the command `gulp deploy-production` to deploy to your Production account.
 
 License
 --
