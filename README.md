@@ -35,6 +35,18 @@ Deploying
 Run the command `gulp deploy-sandbox` to deploy to your Sandbox account.
 Run the command `gulp deploy-production` to deploy to your Production account.
 
+Debugging
+--
+Using the NetSuite debugger is an absolute chore. If you are a Vim user, there
+is now a better option.
+
+1. Install my [NetSuite Browserlink](https://github.com/kevinmershon/netsuite-browserlink.vim)
+plugin into your Vim install.
+2. In Chrome/Chromium, open the extensions window and drag-drop the file
+   `util/vim_netsuite_browserlink.user.js` file into the pane to prompt to
+   install the user script.
+3. Follow the Browserlink usage directions for more details.
+
 License
 --
 AGPLv3
