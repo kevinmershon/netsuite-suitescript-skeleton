@@ -26,14 +26,14 @@ define(['N/https', 'N/log'], function(https, log) {
       username:   opts.username || "NetSuite",
       icon_emoji: opts.icon     || ":speech_balloon:"
     };
-    if (opts.channel) { params.channel = opts.channel };
+    if (opts.channel) { params.channel = opts.channel; }
 
     return https.post({
       url:     opts.url,
       body:    JSON.stringify(params),
       headers: { "Content-Type": "application/json" }
     });
-  };
+  }
 
   return {
     post: post

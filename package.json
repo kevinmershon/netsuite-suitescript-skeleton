@@ -5,17 +5,20 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+  },
   "devDependencies": {
     "chai": "^4.1.2",
     "del": "^3.0.0",
     "gulp": "4.0.0",
     "gulp-changed": "^3.2.0",
     "gulp-filenames": "^4.0.1",
+    "gulp-jshint": "^2.1.0",
     "gulp-minify": "^2.1.0",
     "gulp-mocha": "^5.0.0",
     "gulp-util": "^3.0.8",
     "gulplog": "^1.0.0",
+    "jshint": "^2.9.5"
     "merge-stream": "^1.0.1",
     "netsuite-deploy": "github:michoelchaikin/netsuite-deploy",
     "netsumo": "https://github.com/kevinmershon/netsumo#feature-ss2-extensions"

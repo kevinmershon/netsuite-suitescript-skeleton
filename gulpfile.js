@@ -1,7 +1,14 @@
 // Testing
-const gulp  = require('gulp');
-const mocha = require('gulp-mocha');
-const log   = require('gulplog');
+const gulp   = require('gulp');
+const jshint = require('gulp-jshint');
+const mocha  = require('gulp-mocha');
+const log    = require('gulplog');
+
+gulp.task('lint', function() {
+    return gulp.src('src/js/**/*.js')
+               .pipe(jshint())
+               .pipe(jshint.reporter('default'));
+});
 
 gulp.task('mocha', function() {
   return gulp.src(['test/**/*.js'], { read: false })
@@ -12,10 +19,10 @@ gulp.task('mocha', function() {
 });
 
 const watchMocha = function() {
-  gulp.watch(['lib/**', 'src/**', 'test/**'], gulp.series('mocha'));
+  gulp.watch(['lib/**', 'src/**', 'test/**'], gulp.series('lint', 'mocha'));
 }
 gulp.task('watch-tests', watchMocha);
-gulp.task('test', gulp.series('mocha'));
+gulp.task('test', gulp.series('lint', 'mocha'));
 
 
 

@@ -14,10 +14,10 @@ define([], function() {
     } else {
       return mockedURL;
     }
-  };
+  }
   function mockURL(url) {
     mockedURL = url;
-  };
+  }
 
   function getURLParam(name) {
     name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -30,7 +30,7 @@ define([], function() {
     } else {
       return results[1];
     }
-  };
+  }
 
   return {
     mockURL: mockURL,
