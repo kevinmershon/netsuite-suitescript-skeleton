@@ -20,7 +20,7 @@
     "gulplog": "^1.0.0",
     "jshint": "^2.9.5",
     "merge-stream": "^1.0.1",
-    "netsuite-deploy": "github:michoelchaikin/netsuite-deploy",
+    "netsuite-deploy": "https://github.com/kevinmershon/netsuite-deploy",
     "netsumo": "https://github.com/kevinmershon/netsumo#feature-ss2-extensions"
   },
   "scripts": {

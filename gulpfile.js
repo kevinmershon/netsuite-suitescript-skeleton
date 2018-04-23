@@ -78,5 +78,41 @@ function deploy(environment, done) {
   });
 }
 
+gulp.task('list-files', () => {
+  filenames.forget('all');
+  return merge(
+    gulp
+    .src('src/js/**/*.js')
+    .pipe(filenames('files'))
+  );
+});
+
+function fetch(environment, done) {
+  // Even if there are no results, will still be an empty 'all'
+  if (Object.keys(filenames.get('all')).length === 1) {
+    gulpUtil.log(gulpUtil.colors.red('No files to fetch!'));
+    return done();
+  }
+
+  var envCred = credentials[environment];
+  let config = filenames.get('objects').length
+    ? Object.assign(envCred, { environment, method: 'sdf', file: 'dist\\' })
+    : Object.assign(envCred, {
+        environment,
+        method: 'suitetalk',
+        file: filenames.get('files', 'full'),
+        path: credentials.folder,
+        base: `${__dirname}/dist/FileCabinet/${credentials.folder}/`,
+      });
+
+  const downloadFromNetsuite = require('netsuite-deploy/lib/download.js');
+  return downloadFromNetsuite(config).then(() => {
+    done();
+    process.exit(0);
+  });
+}
+
 gulp.task('deploy-sandbox',    gulp.series(['build'], (done) => { return deploy('sandbox',    done); }));
+gulp.task('pull-sandbox', gulp.series(['list-files'], (done) => { return fetch('sandbox', done); }));
 gulp.task('deploy-production', gulp.series(['build'], (done) => { return deploy('production', done); }));
+gulp.task('pull-production', gulp.series(['list-files'], (done) => { return fetch('production', done); }));
