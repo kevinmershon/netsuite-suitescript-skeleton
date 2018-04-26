@@ -40,6 +40,13 @@ define(['N/runtime', 'N/https'], function(runtime, https) {
   }
 
   function checkProgress() {
+    // for very long operations we need to reload the page fully sometimes
+    const remainingUsage = runtime.getCurrentScript().getRemainingUsage();
+    if (remainingUsage < 100) {
+      window.location.reload();
+      return;
+    }
+
     const responseJSON = https.post({ url: window.location.href }).body;
     if (responseJSON && responseJSON.length > 0) {
       const response = JSON.parse(responseJSON);
