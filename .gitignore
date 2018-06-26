@@ -20,3 +20,6 @@ dist/*
 # Sensitive file
 credentials.json
 .deploycache
+
+# NetSuite debugger
+debugger/*.js
