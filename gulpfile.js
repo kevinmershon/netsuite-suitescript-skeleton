@@ -53,14 +53,21 @@ gulp.task('build', () => {
   );
 });
 
+function prepareSDFCredentials(envCred) {
+  // Prepare SDF credentials
+  require('fs').writeFileSync('.sdf', `account=${envCred.account}\nemail=${envCred.email}\nrole=${envCred.role}\nurl=system.netsuite.com`);
+}
+
 function deploy(environment, done) {
+  var envCred = credentials[environment];
+  prepareSDFCredentials(envCred);
+
   // Even if there are no results, will still be an empty 'all'
   if (Object.keys(filenames.get('all')).length === 1) {
     gulpUtil.log(gulpUtil.colors.red('No files to deploy!'));
     return done();
   }
 
-  var envCred = credentials[environment];
   let config = filenames.get('objects').length
     ? Object.assign(envCred, { environment, method: 'sdf', file: 'dist\\' })
     : Object.assign(envCred, {
@@ -88,13 +95,15 @@ gulp.task('list-files', () => {
 });
 
 function fetch(environment, done) {
+  var envCred = credentials[environment];
+  prepareSDFCredentials(envCred);
+
   // Even if there are no results, will still be an empty 'all'
   if (Object.keys(filenames.get('all')).length === 1) {
     gulpUtil.log(gulpUtil.colors.red('No files to fetch!'));
     return done();
   }
 
-  var envCred = credentials[environment];
   let config = filenames.get('objects').length
     ? Object.assign(envCred, { environment, method: 'sdf', file: 'dist\\' })
     : Object.assign(envCred, {

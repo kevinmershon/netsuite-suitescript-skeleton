@@ -23,3 +23,7 @@ credentials.json
 
 # NetSuite debugger
 debugger/*.js
+
+# NetSuite SDF
+.sdf
+error.log
