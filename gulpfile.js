@@ -180,11 +180,6 @@ function runSDFCommand(envCred, typeFlag, scriptId) {
               '-p',                 path,
               '-destinationfolder', destFolder];
       break;
-    case '--addobject':
-      args = ['adddependencies',
-              '-p',      path,
-              '-object', `scriptid=${scriptId}`];
-      break;
     case '--deploy':
       args = ['deploy',
               '-account', envCred.account,

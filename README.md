@@ -41,6 +41,19 @@ Deploying
 Run the command `gulp deploy-sandbox` to deploy to your Sandbox account.
 Run the command `gulp deploy-production` to deploy to your Production account.
 
+You can also pull any repository-tracked scripts using `gulp pull-sandbox` or
+`gulp pull-production`.
+
+To pull workflows and saved searches you can use `gulp pull-[env] --workflow
+[workflowscriptid]` or `gulp pull-[env] --savedsearch [savedsearchscriptid]`.
+Other types are not supported at this time.
+
+Viewing all account objects can be done with `gulp pull-[env] --listobjects`.
+Previewing deployment changes against an account can be performed with `gulp
+pull-[env] --preview`.
+
+To deploy as an SDF bundle use `gulp deploy-[env] --sdf`.
+
 Debugging
 --
 Using the NetSuite debugger is an absolute chore. If you are a Vim user, there
