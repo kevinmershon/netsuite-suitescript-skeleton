@@ -4,6 +4,8 @@ const jshint = require('gulp-jshint');
 const mocha  = require('gulp-mocha');
 const log    = require('gulplog');
 const spawn  = require('child_process').spawn;
+const { promisify } = require('util');
+const exec = promisify(require('child_process').exec)
 
 gulp.task('lint', function() {
     return gulp.src('src/js/**/*.js')
@@ -25,6 +27,62 @@ const watchMocha = function() {
 gulp.task('watch-tests', watchMocha);
 gulp.task('test', gulp.series('lint', 'mocha'));
 
+function createScript(done) {
+  var fs = require('fs');
+  var scriptHeader;
+  fs.readFile("templates/_script_header.js", function(err, data) {
+    scriptHeader = data;
+  });
+
+
+  var name, email;
+  exec('git config user.name',  function(error,stdout,stderr){ name  = stdout.trim(); });
+  exec('git config user.email', function(error,stdout,stderr){ email = stdout.trim(); });
+
+  var schema = {
+    properties: {
+      Type: { required: true,
+        message: 'client | mapreduce | restlet | scheduled | suitelet | userevent | workflow',
+        pattern: /client|mapreduce|restlet|scheduled|suitelet|userevent|workflow/
+      },
+      Company: { required: true },
+      ScriptTitle: { required: true },
+      ScriptFileName: {
+        required: true,
+        message: 'Script filename: (ends in .js)',
+        pattern: /^.+\.js$/
+      },
+      ScriptID: {
+        required: true,
+        message: 'Script ID (starts with customscript_, no dashes or spaces)',
+        pattern: /^customscript\_[0-9a-zA-Z\_]+$/
+      }
+    }
+  };
+  prompter.start();
+  prompter.get(schema, function (err, result) {
+    if (err) { return onErr(err); }
+
+    var replace = require('gulp-batch-replace');
+    var rename  = require("gulp-rename");
+    var replaceThis = [
+        [ '{{ScriptHeader}}',   scriptHeader ],
+        [ '{{Company}}',        result.Company ],
+        [ '{{Name}}',           name],
+        [ '{{Email}}',          email],
+        [ '{{ScriptFileName}}', result.ScriptFileName ],
+        [ '{{ScriptTitle}}',    result.ScriptTitle ],
+        [ '{{ScriptID}}',       result.ScriptID ]
+    ];
+    gulp.src('templates/'+result.Type+'_template.js')
+        .pipe(replace(replaceThis))
+        .pipe(rename(result.ScriptFileName))
+        .pipe(gulp.dest('src/js/'+result.Type+'/'));
+
+    done();
+  });
+}
+gulp.task('create-script', gulp.series([], (done) => { return createScript(done); }));
 
 
 
@@ -37,6 +95,7 @@ const gulpUtil         = require('gulp-util');
 const changed          = require('gulp-changed');
 const filenames        = require('gulp-filenames');
 const del              = require('del');
+const prompter         = require('prompt');
 
 gulp.task('clean', () => {
   del(".deploycache"); // wipe the Netsuite deploy cache
@@ -85,8 +144,6 @@ function runSDFCommand(envCred, typeFlag, scriptId) {
     default:
       // no-op
   }
-
-
 
   var type;
   var destFolder;
@@ -212,7 +269,6 @@ function deploy(environment, sdfArgs, done) {
     });
   }
 }
-
 
 function fetch(environment, sdfArgs, done) {
   var envCred = credentials[environment];

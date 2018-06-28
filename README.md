@@ -29,6 +29,12 @@ the NetSuite account you are attempting to deploy to.
   subdomain, run the following command:
 
    `./util/use_top_level_sandbox.py`
+5. If you want to use the SuiteCloud Development Framework to backup and deploy
+   object definitions alongside your scripts, first [install the SDF CLI
+   tools](https://system.netsuite.com/app/help/helpcenter.nl?fid=section_1489072409.html)
+   and then run `./util/init_sdf.sh` to configure the project folders.
+6. If you want to use the `gulp create-script` command, be sure to edit the
+   script header definition in `templates/_script_header.js`.
 
 Deploying
 --
