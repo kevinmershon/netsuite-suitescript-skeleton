@@ -3,6 +3,7 @@ const gulp   = require('gulp');
 const jshint = require('gulp-jshint');
 const mocha  = require('gulp-mocha');
 const log    = require('gulplog');
+const spawn  = require('child_process').spawn;
 
 gulp.task('lint', function() {
     return gulp.src('src/js/**/*.js')
@@ -68,6 +69,25 @@ function prepareSDFCredentials(envCred) {
 }
 
 function runSDFCommand(envCred, typeFlag, scriptId) {
+  var path = __dirname;
+
+  switch (typeFlag.toLowerCase()) {
+    case '--preview':
+    case '--deploy':
+      path = `/tmp/netsuite-${envCred.account}.zip`;
+      var doZip = spawn('zip', [
+        '-r', path,
+        '.',
+        '--exclude=*.git*',
+        '--exclude=*node_modules*'
+      ]);
+      break;
+    default:
+      // no-op
+  }
+
+
+
   var type;
   var destFolder;
   var args;
@@ -79,37 +99,49 @@ function runSDFCommand(envCred, typeFlag, scriptId) {
               '-role',    envCred.role,
               '-url',     'system.netsuite.com'];
       break;
+    case '--preview':
+      args = ['preview',
+              '-account', envCred.account,
+              '-email',   envCred.email,
+              '-role',    envCred.role,
+              '-p',       path,
+              '-url',     'system.netsuite.com'];
+      break;
     case '--workflow':
-      type = 'workflow'; destFolder = '/Objects/Workflows';
+      type = 'workflow'; destFolder = '/Objects';
       args = ['importobjects',
               '-scriptid',          scriptId,
               '-type',              type,
-              '-p',                 __dirname,
+              '-p',                 path,
               '-destinationfolder', destFolder];
       break;
     case '--savedsearch':
-      type = 'savedsearch'; destFolder = '/Objects/SavedSearches';
+      type = 'savedsearch'; destFolder = '/Objects';
       args = ['importobjects',
               '-scriptid',          scriptId,
               '-type',              type,
-              '-p',                 __dirname,
+              '-p',                 path,
               '-destinationfolder', destFolder];
       break;
     case '--addobject':
       args = ['adddependencies',
-              '-p',      '.',
+              '-p',      path,
               '-object', `scriptid=${scriptId}`];
       break;
     case '--deploy':
       args = ['deploy',
-              '-p',      __dirname];
+              '-account', envCred.account,
+              '-email',   envCred.email,
+              '-role',    envCred.role,
+              '-p',       path,
+              '-url',     'system.netsuite.com'];
       break;
     default:
       throw 'Invalid type specified: ' + type;
   }
 
-  var spawn  = require('child_process').spawn,
-      sdfcli = spawn('sdfcli', args);
+
+  var sdfcli = spawn('sdfcli', args);
 
   var showAfter = false;
   sdfcli.stderr.on('data', function(data) {
