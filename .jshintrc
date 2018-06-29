@@ -1,3 +1,15 @@
 {
-  "esversion": 6
+  "esversion":     6,
+
+  "curly":         true,
+  "eqeqeq":        true,
+  "asi":           false,
+  "maxcomplexity": 12,
+  "quotmark":      true,
+  "unused":        "vars",
+  "undef":         true,
+
+  "browser":       true,
+  "devel":         true,
+  "globals":       { "define": true }
 }
