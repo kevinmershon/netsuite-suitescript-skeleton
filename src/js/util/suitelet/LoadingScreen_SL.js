@@ -31,7 +31,7 @@ define(['N/redirect', 'N/ui/serverWidget', 'N/task', 'N/log'], function(redirect
     });
 
     // PENDING | PROCESSING | COMPLETE | FAILED
-    context.response.write("{\"status\": \"" + summary.status + "\"}");
+    context.response.write('{"status": "' + summary.status + '"}');
   }
 
   function maybeRedirectToRecord(context) {
