@@ -10,7 +10,8 @@ const exec = promisify(require('child_process').exec)
 gulp.task('lint', function() {
     return gulp.src('src/js/**/*.js')
                .pipe(jshint())
-               .pipe(jshint.reporter('default'));
+               .pipe(jshint.reporter('default'))
+               .pipe(jshint.reporter('fail'));
 });
 
 gulp.task('mocha', function() {
@@ -299,8 +300,8 @@ function fetch(environment, sdfArgs, done) {
 // SDF args
 var sdfArgs = process.argv.slice(3);
 
-gulp.task('deploy-sandbox',    gulp.series(['build'], (done) => { return deploy('sandbox', sdfArgs, done); }));
+gulp.task('deploy-sandbox',    gulp.series(['lint', 'build'], (done) => { return deploy('sandbox', sdfArgs, done); }));
 gulp.task('pull-sandbox', gulp.series(['list-files'], (done) => { return fetch('sandbox', sdfArgs, done); }));
-gulp.task('deploy-production', gulp.series(['build'], (done) => { return deploy('production', sdfArgs, done); }));
+gulp.task('deploy-production', gulp.series(['lint', 'build'], (done) => { return deploy('production', sdfArgs, done); }));
 gulp.task('pull-production', gulp.series(['list-files'], (done) => { return fetch('production', sdfArgs, done); }));
 gulp.task('sdf', gulp.series([], (done) => { return sdfcli(sdfArgs, done); }));
