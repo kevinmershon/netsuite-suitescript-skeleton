@@ -147,7 +147,7 @@ function runSDFCommand(envCred, typeFlag, scriptId) {
   }
 
   var type;
-  var destFolder;
+  const destFolder = '/Objects';
   var args;
   switch (typeFlag.toLowerCase()) {
     case '--listobjects':
@@ -190,7 +190,13 @@ function runSDFCommand(envCred, typeFlag, scriptId) {
               '-url',     'system.netsuite.com'];
       break;
     default:
-      throw 'Invalid type specified: ' + type;
+      // workflow, savedsearch, script types, etc.
+      type = typeFlag.toLowerCase().substring(2);
+      args = ['importobjects',
+              '-scriptid',          scriptId,
+              '-type',              type,
+              '-p',                 path,
+              '-destinationfolder', destFolder];
   }
 
 
@@ -208,7 +214,7 @@ function runSDFCommand(envCred, typeFlag, scriptId) {
     var inString = (''+data);
     if (inString.indexOf('Enter password:') >= 0) {
       sdfcli.stdin.write(`${envCred.password}\r`);
-    } else if (inString.indexOf('Type YES to') >= 0) {
+    } else if (inString.indexOf('YES to') >= 0) {
       sdfcli.stdin.write('YES\r');
     } else if (inString.indexOf('Using user credentials') >= 0) {
       showAfter = true;
@@ -268,6 +274,7 @@ function deploy(environment, sdfArgs, done) {
 
 function fetch(environment, sdfArgs, done) {
   var envCred = credentials[environment];
+  prepareSDFCredentials(envCred);
 
   if (sdfArgs && sdfArgs.length > 0) {
     runSDFCommand(envCred, sdfArgs[0], sdfArgs[1]);
