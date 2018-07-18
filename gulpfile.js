@@ -47,16 +47,21 @@ function createScript(done) {
         pattern: /client|mapreduce|restlet|scheduled|suitelet|userevent|workflow/
       },
       Company: { required: true },
-      ScriptTitle: { required: true },
+      ScriptTitle: {
+        required: true,
+        message:   'Script Title (spaces allowed, max 40 chars)',
+        maxLength: 40
+      },
       ScriptFileName: {
         required: true,
         message: 'Script filename: (ends in .js)',
         pattern: /^.+\.js$/
       },
       ScriptID: {
-        required: true,
-        message: 'Script ID (starts with customscript_, no dashes or spaces)',
-        pattern: /^customscript\_[0-9a-zA-Z\_]+$/
+        required:  true,
+        message:   'Script ID (starts with customscript_, no dashes or spaces, max 28 chars)',
+        pattern:   /^customscript\_[0-9a-zA-Z\_]+$/,
+        maxLength: 28
       }
     }
   };
