@@ -15,7 +15,6 @@ define(['N/search'], function(search) {
       columns: ['internalid']
     }).run();
     results.each(function(result) {
-      //log.debug(JSON.stringify(result));
       listID = result.getValue({ name: 'internalid' });
       return true;
     });
