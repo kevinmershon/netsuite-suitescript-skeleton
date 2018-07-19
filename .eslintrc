@@ -19,6 +19,6 @@
     "object-curly-spacing":    ["warn", "always"],
     "space-before-blocks":     ["warn", "always"],
     "space-in-parens":         ["warn", "never"],
-    "spaced-comment":          ["warn", "always"]
+    "spaced-comment":          ["warn", "always", { "exceptions": ["*"] }]
   }
 }
