@@ -1,0 +1,21 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "rules": {
+    "indent": [
+      "warn",
+       2,
+       {
+         "VariableDeclarator": { "var": 2, "let": 2, "const": 3 },
+         "ObjectExpression": "first",
+         "SwitchCase": 1
+       }
+    ],
+    "keyword-spacing":         ["warn", { "before": true, "after": true }],
+    "no-irregular-whitespace": ["error", {}],
+    "object-curly-spacing":    ["warn", "always"],
+    "space-before-blocks":     ["warn", "always"],
+    "space-in-parens":         ["warn", "never"]
+  }
+}
