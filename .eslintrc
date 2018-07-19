@@ -14,6 +14,7 @@
     ],
     "keyword-spacing":         ["warn", { "before": true, "after": true }],
     "no-irregular-whitespace": ["error", {}],
+    "no-trailing-spaces":      ["warn", {}],
     "object-curly-spacing":    ["warn", "always"],
     "space-before-blocks":     ["warn", "always"],
     "space-in-parens":         ["warn", "never"]
