@@ -104,6 +104,7 @@ const merge            = require('merge-stream');
 const gulpUtil         = require('gulp-util');
 const changed          = require('gulp-changed');
 const filenames        = require('gulp-filenames');
+const gulpSlash        = require('gulp-slash');
 const del              = require('del');
 const prompter         = require('prompt');
 
@@ -120,6 +121,7 @@ gulp.task('build', () => {
     .pipe(changed(scriptDest))
     .pipe(gulp.dest(scriptDest))
     .pipe(filenames('files'))
+    .pipe(gulpSlash())
   );
 });
 
@@ -129,6 +131,7 @@ gulp.task('list-files', () => {
     gulp
     .src('src/js/**/*.js')
     .pipe(filenames('files'))
+    .pipe(gulpSlash())
   );
 });
 
@@ -268,7 +271,7 @@ function deploy(environment, sdfArgs, done) {
       : Object.assign(envCred, {
           environment,
           method: 'suitetalk',
-          file: filenames.get('files', 'full'),
+          file: gulpSlash(filenames.get('files', 'full')),
           path: credentials.folder,
           base: `${__dirname}/dist/FileCabinet/${credentials.folder}/`,
         });
@@ -300,7 +303,7 @@ function fetch(environment, sdfArgs, done) {
       : Object.assign(envCred, {
           environment,
           method: 'suitetalk',
-          file: filenames.get('files', 'full'),
+          file: gulpSlash(filenames.get('files', 'full')),
           path: credentials.folder,
           base: `${__dirname}/dist/FileCabinet/${credentials.folder}/`,
         });
