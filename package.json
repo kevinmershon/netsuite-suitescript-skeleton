@@ -19,7 +19,7 @@
     "gulp-minify": "^2.1.0",
     "gulp-mocha": "^5.0.0",
     "gulp-rename": "^1.3.0",
-    "gulp-slash": "^1.1.3"
+    "gulp-slash": "^1.1.3",
     "gulp-util": "^3.0.8",
     "gulplog": "^1.0.0",
     "jshint": "^2.9.5",
