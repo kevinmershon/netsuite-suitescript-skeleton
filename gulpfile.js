@@ -63,9 +63,9 @@ function createScript(done) {
       },
       ScriptID: {
         required:  true,
-        message:   'Script ID (starts with customscript_, no dashes or spaces, max 28 chars)',
+        message:   'Script ID (starts with customscript_, no dashes or spaces, max 40 chars)',
         pattern:   /^customscript\_[0-9a-zA-Z\_]+$/,
-        maxLength: 28
+        maxLength: 40
       }
     }
   };
