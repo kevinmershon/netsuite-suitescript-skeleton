@@ -111,7 +111,6 @@ define(['N/runtime', 'N/ui/dialog', 'N/record', 'N/search', 'N/log'], function(r
     lineInit:       lineInit,
     pageInit:       pageInit,
     postSourcing:   postSourcing,
-    validateLine:   validateLine,
     saveRecord:     saveRecord,
     sublistChanged: sublistChanged,
     validateDelete: validateDelete,
