@@ -1729,13 +1729,6 @@ gulp-rename@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/gulp-rename/-/gulp-rename-1.3.0.tgz#2e789d8f563ab0c924eeb62967576f37ff4cb826"
 
-gulp-slash@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/gulp-slash/-/gulp-slash-1.1.3.tgz#f15521ac23b178db44e551e30e2fcbca4bf6fe1d"
-  dependencies:
-    slash "~0.1.3"
-    through2 "~0.5.1"
-
 gulp-util@>=2.2.0, gulp-util@^3.0.8:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/gulp-util/-/gulp-util-3.0.8.tgz#0054e1e744502e27c04c187c3ecc505dd54bbb4f"
@@ -2875,7 +2868,7 @@ ncp@1.0.x:
 
 "netsuite-deploy@https://github.com/kevinmershon/netsuite-deploy":
   version "1.0.0"
-  resolved "https://github.com/kevinmershon/netsuite-deploy#5f266894f95d6fd176aff42eed8783f221153f22"
+  resolved "https://github.com/kevinmershon/netsuite-deploy#174ff5c6e3b15ad55457e5f361a2919f380c45a0"
   dependencies:
     cross-spawn "^5.1.0"
     nconf "^0.8.4"
@@ -3797,10 +3790,6 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
-slash@~0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/slash/-/slash-0.1.3.tgz#aa710c8ef50b8e1d187ad6cff46f38c656ba0e57"
-
 slice-ansi@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slice-ansi/-/slice-ansi-1.0.0.tgz#044f1a49d8842ff307aad6b505ed178bd950134d"
@@ -4200,7 +4189,7 @@ through2@^0.4.0:
     readable-stream "~1.0.17"
     xtend "~2.1.1"
 
-through2@^0.5.0, through2@~0.5.1:
+through2@^0.5.0:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/through2/-/through2-0.5.1.tgz#dfdd012eb9c700e2323fd334f38ac622ab372da7"
   dependencies:
