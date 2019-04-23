@@ -7,7 +7,7 @@
 define(['N/runtime', 'N/https'], function(runtime, https) {
   // GOTCHA -- configure these to files in your File Cabinet
   const LOGO_URL        = 'http://via.placeholder.com/800x300?text=Please configure your logo',
-        LOADING_GIF_URL = 'http://via.placeholder.com/600x50?text=Please configure your progress gif';
+        LOADING_GIF_URL = 'http://i.stack.imgur.com/FhHRx.gif';
 
   var taskID = null;
 

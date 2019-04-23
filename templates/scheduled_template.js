@@ -22,7 +22,7 @@ define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(runtim
   }
 
   return {
-    execute: execute
+    'execute': execute
   };
 
 });

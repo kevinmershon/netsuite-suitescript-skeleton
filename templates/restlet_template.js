@@ -35,10 +35,10 @@ define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(runtim
   }
 
   return {
-    delete: onDelete,
-    get:    onGet,
-    post:   onPost,
-    put:    onPut
+    'delete': onDelete,
+    'get':    onGet,
+    'post':   onPost,
+    'put':    onPut
   };
 
 });

@@ -80,10 +80,10 @@ define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(runtim
   }
 
   return {
-    getInputData: getInputData,
-    map:          map,
-    reduce:       reduce,
-    summarize:    summarize
+    'getInputData': getInputData,
+    'map':          map,
+    'reduce':       reduce,
+    'summarize':    summarize
   };
 
 });

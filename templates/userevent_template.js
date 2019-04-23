@@ -43,9 +43,9 @@ define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(runtim
   }
 
   return {
-    afterSubmit:  afterSubmit,
-    beforeLoad:   beforeLoad,
-    beforeSubmit: beforeSubmit
+    'afterSubmit':  afterSubmit,
+    'beforeLoad':   beforeLoad,
+    'beforeSubmit': beforeSubmit
   };
 
 });

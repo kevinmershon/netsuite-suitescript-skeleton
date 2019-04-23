@@ -15,15 +15,15 @@
 define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(runtime, task, record, search, log) {
 
   /**
-   * params.request
-   * params.response
+   * context.request
+   * context.response
    */
-  function onRequest(params) {
+  function onRequest(context) {
     // no return value
   }
 
   return {
-    onRequest: onRequest
+    'onRequest': onRequest
   };
 
 });
