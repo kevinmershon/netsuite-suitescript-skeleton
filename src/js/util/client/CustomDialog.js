@@ -49,17 +49,15 @@ define(['N/ui/dialog'], function(
     inputSpan.className = 'uir-field';
 
     const inputSpanInner = document.createElement('span');
-    // @ts-ignore
-    inputSpanInner.style     = 'white-space: nowrap';
-    inputSpanInner.className = 'effectStatic';
+    inputSpanInner.style['white-space'] = 'nowrap';
+    inputSpanInner.className            = 'effectStatic';
     inputSpan.append(inputSpanInner);
 
     const input = document.createElement('input');
     input.id           = id;
     input.size         = 30;
     input.autocomplete = autoCompleteRole;
-    // @ts-ignore
-    input.style        = 'width: 420px';
+    input.style.width  = '420px';
     input.className    = 'input';
     inputSpanInner.append(input);
 
