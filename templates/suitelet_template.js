@@ -12,11 +12,19 @@
  *
  ******************************************************************************/
 
-define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(runtime, task, record, search, log) {
+define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(
+  /** @type {import('N/runtime') **/ runtime,
+  /** @type {import('N/task')    **/ task,
+  /** @type {import('N/record')  **/ record,
+  /** @type {import('N/search')  **/ search,
+  /** @type {import('N/log')     **/ log
+) {
 
   /**
    * context.request
    * context.response
+   *
+   * @type {import('N/types').EntryPoints.Suitelet.onRequest}
    */
   function onRequest(context) {
     // no return value

@@ -5,7 +5,11 @@
  * @NApiVersion 2.0
  * @NScriptType Suitelet
  */
-define(['N/redirect', 'N/ui/serverWidget', 'N/task', 'N/log'], function(redirect, ui, task, log) {
+define(['N/redirect', 'N/ui/serverWidget', 'N/task'], function(
+  /** @type import('N/redirect')        **/ redirect,
+  /** @type import('N/ui/serverWidget') **/ ui,
+  /** @type import('N/task')            **/ task
+) {
 
   function renderPage(context) {
     const form = ui.createForm({ title: 'Loading...' });
@@ -26,8 +30,7 @@ define(['N/redirect', 'N/ui/serverWidget', 'N/task', 'N/log'], function(redirect
 
   function checkProgress(context) {
     const summary = task.checkStatus({
-      'taskType': task.TaskType.MAP_REDUCE,
-      'taskId':   context.request.parameters.custscript_taskid
+      'taskId': context.request.parameters.custscript_taskid
     });
 
     // PENDING | PROCESSING | COMPLETE | FAILED
@@ -36,10 +39,9 @@ define(['N/redirect', 'N/ui/serverWidget', 'N/task', 'N/log'], function(redirect
 
   function maybeRedirectToRecord(context) {
     const summary = task.checkStatus({
-      'taskType': task.TaskType.MAP_REDUCE,
-      'taskId':   context.request.parameters.custscript_taskid
+      'taskId': context.request.parameters.custscript_taskid
     });
-    if (summary.status === 'COMPLETE' || summary.status === 'FAILED') {
+    if (summary.status === task.TaskStatus.COMPLETE || summary.status === task.TaskStatus.FAILED) {
       // redirect to the intended record
       redirect.toRecord({
         type: context.request.parameters.custscript_redirect_type,

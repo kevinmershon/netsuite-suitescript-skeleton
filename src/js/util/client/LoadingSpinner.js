@@ -73,7 +73,7 @@
     jQuery('.spinnermodal').html(message);
   };
 
-  method.hide = function(message) {
+  method.hide = function() {
     jQuery('body').removeClass('spinnerloading');
   };
 

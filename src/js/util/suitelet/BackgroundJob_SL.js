@@ -4,17 +4,23 @@
  *
  * @NApiVersion 2.0
  */
-define(['N/redirect', 'N/task', 'N/log'], function(redirect, task, log) {
+define(['N/redirect', 'N/task', 'N/log'], function(
+  /** @type import('N/redirect') **/ redirect,
+  /** @type import('N/task') **/ task,
+  /** @type import('N/log') **/ log
+) {
 
   function scheduleJob(opts) {
     log.audit({
       title: 'Scheduling Task',
       details: opts.description
     });
-    const worker = task.create({ taskType: opts.taskType });
-    worker.scriptId     = opts.scriptId;
-    worker.deploymentId = opts.deploymentId;
-    worker.params       = opts.params || {};
+    const worker = task.create({
+      taskType:     opts.taskType,
+      scriptId:     opts.scriptId,
+      deploymentId: opts.deploymentId,
+      params:       opts.params || {}
+    });
     const taskID = worker.submit();
 
     // redirect to the loading screen (script and deployment ids must be passed

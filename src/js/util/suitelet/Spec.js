@@ -84,11 +84,7 @@
   };
 
   function isFinite(val) {
-    if (Number.isFinite) {
-      return Number.isFinite(val);
-    } else {
-      return !Number.isNaN && Number !== -Infinity && Number !== Infinity;
-    }
+    return !isNaN(val) && val !== -Infinity && val !== Infinity;
   }
 
   method.Number = function() {

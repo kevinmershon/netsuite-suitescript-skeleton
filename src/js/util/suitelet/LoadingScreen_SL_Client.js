@@ -4,12 +4,13 @@
  * @NApiVersion 2.0
  * @NScriptType ClientScript
  */
-define(['N/runtime', 'N/https'], function(runtime, https) {
+define(['N/runtime', 'N/https'], function(
+  /** @type import('N/runtime') **/ runtime,
+  /** @type import('N/https')   **/ https
+) {
   // GOTCHA -- configure these to files in your File Cabinet
   const LOGO_URL        = 'http://via.placeholder.com/800x300?text=Please configure your logo',
         LOADING_GIF_URL = 'http://i.stack.imgur.com/FhHRx.gif';
-
-  var taskID = null;
 
   function addLoadingElementToPage() {
     const div = document.createElement('div');
@@ -47,6 +48,7 @@ define(['N/runtime', 'N/https'], function(runtime, https) {
       return;
     }
 
+    // @ts-ignore
     const responseJSON = https.post({ url: window.location.href }).body;
     if (responseJSON && responseJSON.length > 0) {
       const response = JSON.parse(responseJSON);
@@ -64,7 +66,7 @@ define(['N/runtime', 'N/https'], function(runtime, https) {
   function pageInit(context) {
     // load the script deployment to get the parameter values
     addLoadingElementToPage();
-    taskID = context.currentRecord.getValue({ fieldId: 'custpage_taskid' });
+    context.currentRecord.getValue({ fieldId: 'custpage_taskid' });
 
     setTimeout(checkProgress, 1000);
   }

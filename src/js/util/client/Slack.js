@@ -3,7 +3,10 @@
  *
  * @NApiVersion 2.0
  */
-define(['N/https', 'N/log'], function(https, log) {
+define(['N/https', 'N/log'], function(
+  /** @type import('N/https') **/ https,
+  /** @type import('N/log')   **/ log
+) {
 
   function post(opts) {
     if (!opts.url) {

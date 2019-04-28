@@ -12,7 +12,13 @@
  *
  ******************************************************************************/
 
-define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(runtime, task, record, search, log) {
+define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(
+  /** @type {import('N/runtime') **/ runtime,
+  /** @type {import('N/task')    **/ task,
+  /** @type {import('N/record')  **/ record,
+  /** @type {import('N/search')  **/ search,
+  /** @type {import('N/log')     **/ log
+) {
 
   /**
    * context.newRecord
@@ -20,6 +26,8 @@ define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(runtim
    * context.form
    * context.type
    * context.workflowId
+   *
+   * @type {import('N/types').EntryPoints.WorkflowAction.onAction}
    */
   function onAction(context) {
     // no return value

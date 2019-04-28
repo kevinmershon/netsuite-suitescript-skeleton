@@ -12,14 +12,23 @@
  *
  ******************************************************************************/
 
-define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(runtime, task, record, search, log) {
+define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(
+  /** @type import('N/runtime') **/ runtime,
+  /** @type import('N/task')    **/ task,
+  /** @type import('N/record')  **/ record,
+  /** @type import('N/search')  **/ search,
+  /** @type import('N/log')     **/ log
+) {
 
   /**
    * inputContext.isRestarted
    * inputContext.ObjectRef
+   *
+   * @type {import('N/types').EntryPoints.MapReduce.getInputData}
    */
   function getInputData(inputContext) {
     // return array, object, search.create/load, file.load
+    console.log(inputContext);
     return [];
   }
 
@@ -30,6 +39,8 @@ define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(runtim
    * context.key
    * context.value
    * context.write()
+   *
+   * @type {import('N/types').EntryPoints.MapReduce.map}
    */
   function map(context) {
     // mutate data using context.value and write to shuffle/reduce stage
@@ -45,6 +56,8 @@ define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(runtim
    * context.key
    * context.values
    * context.write()
+   *
+   * @type {import('N/types').EntryPoints.MapReduce.reduce}
    */
   function reduce(context) {
     // mutate data using context.key and context.values and write to summary
@@ -54,7 +67,9 @@ define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(runtim
     // context.key will equal 'value group' from map stage
     // context.values will be array of strings or JSON values, probably needing
     //   parsed with JSON.parse()
-    context.write(1);
+    for (var i=0; i<context.values.length; i++) {
+      context.write('value group', context.values[i]);
+    }
   }
 
   /**
@@ -67,11 +82,13 @@ define(['N/runtime', 'N/task', 'N/record', 'N/search', 'N/log'], function(runtim
    * context.inputSummary
    * context.mapSummary
    * context.reduceSummary
-   * context.output.each()
+   * context.output.iterator().each()
+   *
+   * @type {import('N/types').EntryPoints.MapReduce.summarize}
    */
   function summarize(context) {
     // output results
-    context.output.each(function(key, value) {
+    context.output.iterator().each(function(key, value) {
       // do some logic to summarize results, log, etc.
 
       // keep outputting summary results

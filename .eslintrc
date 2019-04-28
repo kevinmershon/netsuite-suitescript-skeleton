@@ -1,8 +1,21 @@
 {
+
+  "plugins": [
+    "tsc"
+  ],
+
   "parserOptions": {
     "ecmaVersion": 6
   },
+
+  "env": {
+    "amd":     true,
+    "browser": true
+  },
+
   "rules": {
+    "tsc/config": [1, { configFile: ".tsconfig.json" }],
+
     brace-style: ["error", "1tbs", { "allowSingleLine": true }],
     "indent": [
       "warn",
@@ -13,12 +26,78 @@
          "SwitchCase": 1
        }
     ],
-    "keyword-spacing":         ["warn", { "before": true, "after": true }],
+    "curly":                   ["error", "all"],
+    "eqeqeq":                  ["error", "always"],
+    "semi":                    ["error", "always"],
+    "complexity":              ["error", 12],
+    "quotes":                  ["error", "single"],
+    "no-unused-vars":          ["error", "local"],
+    "no-label-var":            ["error"],
+    "keyword-spacing":         ["error", { "before": true, "after": true }],
     "no-irregular-whitespace": ["error", {}],
-    "no-trailing-spaces":      ["warn", {}],
-    "object-curly-spacing":    ["warn", "always"],
-    "space-before-blocks":     ["warn", "always"],
-    "space-in-parens":         ["warn", "never"],
-    "spaced-comment":          ["warn", "always", { "exceptions": ["*"] }]
+    "no-trailing-spaces":      ["error", {}],
+    "object-curly-spacing":    ["error", "always"],
+    "space-before-blocks":     ["error", "always"],
+    "space-in-parens":         ["error", "never"],
+    "spaced-comment":          ["warn", "always", { "exceptions": ["*"] }],
+    "id-blacklist":            ["error", "data", "err", "sublistid", "sublistID", "fieldid", "fieldID"]
+  },
+
+  "globals": {
+     "nlapiAddDays":                      true,
+     "nlapiCopyRecord":                   true,
+     "nlapiCreateError":                  true,
+     "nlapiCreateFile":                   true,
+     "nlapiCreateForm":                   true,
+     "nlapiCreateRecord":                 true,
+     "nlapiCreateSearch":                 true,
+     "nlapiDateToString":                 true,
+     "nlapiDeleteRecord":                 true,
+     "nlapiEditCurrentLineItemSubrecord": true,
+     "nlapiEscapeXML":                    true,
+     "nlapiFindLineItemValue":            true,
+     "nlapiFormatCurrency":               true,
+     "nlapiGetContext":                   true,
+     "nlapiGetCurrentLineItemText":       true,
+     "nlapiGetCurrentLineItemValue":      true,
+     "nlapiGetFieldText":                 true,
+     "nlapiGetFieldValue":                true,
+     "nlapiGetLineItemCount":             true,
+     "nlapiGetLineItemText":              true,
+     "nlapiGetLineItemValue":             true,
+     "nlapiGetNewRecord":                 true,
+     "nlapiGetOldRecord":                 true,
+     "nlapiGetRecordId":                  true,
+     "nlapiGetRecordType":                true,
+     "nlapiGetUser":                      true,
+     "nlapiLoadConfiguration":            true,
+     "nlapiLoadFile":                     true,
+     "nlapiLoadRecord":                   true,
+     "nlapiLoadSearch":                   true,
+     "nlapiLogExecution":                 true,
+     "nlapiLookupField":                  true,
+     "nlapiRemoveLineItem":               true,
+     "nlapiRequestURL":                   true,
+     "nlapiResolveURL":                   true,
+     "nlapiScheduleScript":               true,
+     "nlapiSearchRecord":                 true,
+     "nlapiSelectLineItem":               true,
+     "nlapiSendEmail":                    true,
+     "nlapiSetCurrentLineItemText":       true,
+     "nlapiSetCurrentLineItemValue":      true,
+     "nlapiSetFieldDisabled":             true,
+     "nlapiSetFieldMandatory":            true,
+     "nlapiSetFieldValue":                true,
+     "nlapiSetFieldValues":               true,
+     "nlapiSetLineItemText":              true,
+     "nlapiSetLineItemValue":             true,
+     "nlapiSubmitField":                  true,
+     "nlapiSubmitFile":                   true,
+     "nlapiSubmitRecord":                 true,
+     "nlapiTransformRecord":              true,
+     "nlapiXMLToPDF":                     true,
+     "nlapiYieldScript":                  true,
+     "nlobjSearchColumn":                 true,
+     "nlobjSearchFilter":                 true
   }
 }

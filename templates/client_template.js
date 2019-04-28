@@ -12,7 +12,13 @@
  *
  ******************************************************************************/
 
-define(['N/runtime', 'N/ui/dialog', 'N/record', 'N/search', 'N/log'], function(runtime, dialog, record, search, log) {
+define(['N/runtime', 'N/ui/dialog', 'N/record', 'N/search', 'N/log'], function(
+  /** @type import('N/runtime')   **/ runtime,
+  /** @type import('N/ui/dialog') **/ dialog,
+  /** @type import('N/record')    **/ record,
+  /** @type import('N/search')    **/ search,
+  /** @type import('N/log')       **/ log
+) {
 
   /**
    * context.currentRecord
@@ -20,6 +26,8 @@ define(['N/runtime', 'N/ui/dialog', 'N/record', 'N/search', 'N/log'], function(r
    * context.fieldId
    * context.line
    * context.column
+   *
+   * @type {import('N/types').EntryPoints.Client.fieldChanged}
    */
   function fieldChanged(context) {
     // no return value
@@ -28,6 +36,8 @@ define(['N/runtime', 'N/ui/dialog', 'N/record', 'N/search', 'N/log'], function(r
   /**
    * context.currentRecord
    * context.sublistId
+   *
+   * @type {import('N/types').EntryPoints.Client.lineInit}
    */
   function lineInit(context) {
     // no return value
@@ -36,6 +46,8 @@ define(['N/runtime', 'N/ui/dialog', 'N/record', 'N/search', 'N/log'], function(r
   /**
    * context.currentRecord
    * context.mode // [copy, paste, create]
+   *
+   * @type {import('N/types').EntryPoints.Client.pageInit}
    */
   function pageInit(context) {
     // no return value
@@ -45,6 +57,8 @@ define(['N/runtime', 'N/ui/dialog', 'N/record', 'N/search', 'N/log'], function(r
    * context.currentRecord
    * context.sublistId
    * context.fieldId
+   *
+   * @type {import('N/types').EntryPoints.Client.postSourcing}
    */
   function postSourcing(context) {
     // no return value
@@ -52,6 +66,8 @@ define(['N/runtime', 'N/ui/dialog', 'N/record', 'N/search', 'N/log'], function(r
 
   /**
    * context.currentRecord
+   *
+   * @type {import('N/types').EntryPoints.Client.saveRecord}
    */
   function saveRecord(context) {
     // return true if record is valid, false to reject
@@ -61,6 +77,8 @@ define(['N/runtime', 'N/ui/dialog', 'N/record', 'N/search', 'N/log'], function(r
   /**
    * context.currentRecord
    * context.sublistId
+   *
+   * @type {import('N/types').EntryPoints.Client.sublistChanged}
    */
   function sublistChanged(context) {
     // no return value
@@ -69,6 +87,8 @@ define(['N/runtime', 'N/ui/dialog', 'N/record', 'N/search', 'N/log'], function(r
   /**
    * context.currentRecord
    * context.sublistId
+   *
+   * @type {import('N/types').EntryPoints.Client.validateDelete}
    */
   function validateDelete(context) {
     // return true if delete is permitted, false to reject
@@ -81,6 +101,8 @@ define(['N/runtime', 'N/ui/dialog', 'N/record', 'N/search', 'N/log'], function(r
    * context.fieldId
    * context.line
    * context.column
+   *
+   * @type {import('N/types').EntryPoints.Client.validateField}
    */
   function validateField(context) {
     // return true if field is valid, false to reject
@@ -90,6 +112,8 @@ define(['N/runtime', 'N/ui/dialog', 'N/record', 'N/search', 'N/log'], function(r
   /**
    * context.currentRecord
    * context.sublistId
+   *
+   * @type {import('N/types').EntryPoints.Client.validateInsert}
    */
   function validateInsert(context) {
     // return true if insert is permitted, false to reject
@@ -104,7 +128,6 @@ define(['N/runtime', 'N/ui/dialog', 'N/record', 'N/search', 'N/log'], function(r
     // return true if line is valid, false to reject
     return true;
   }
-
 
   return {
     'fieldChanged':   fieldChanged,
