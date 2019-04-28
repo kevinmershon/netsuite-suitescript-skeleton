@@ -13,11 +13,11 @@
  ******************************************************************************/
 
 define(['N/runtime', 'N/ui/dialog', 'N/record', 'N/search', 'N/log'], function(
-  /** @type import('N/runtime')   **/ runtime,
-  /** @type import('N/ui/dialog') **/ dialog,
-  /** @type import('N/record')    **/ record,
-  /** @type import('N/search')    **/ search,
-  /** @type import('N/log')       **/ log
+  /** @type import('N/runtime')}   **/ runtime,
+  /** @type import('N/ui/dialog')} **/ dialog,
+  /** @type import('N/record')}    **/ record,
+  /** @type import('N/search')}    **/ search,
+  /** @type import('N/log')}       **/ log
 ) {
 
   /**

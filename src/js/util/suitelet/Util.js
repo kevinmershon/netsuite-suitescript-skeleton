@@ -41,7 +41,7 @@ define(['N/search'], function(
     return output;
   }
 
-  function stripEmpties(input) { // jshint ignore: line
+  function stripEmpties(input) {
     var output = {};
     var sKeys = Object.keys(input);
     for (var s=0; s<sKeys.length; s++) {

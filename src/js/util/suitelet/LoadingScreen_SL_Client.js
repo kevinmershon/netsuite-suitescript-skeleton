@@ -5,8 +5,8 @@
  * @NScriptType ClientScript
  */
 define(['N/runtime', 'N/https'], function(
-  /** @type import('N/runtime') **/ runtime,
-  /** @type import('N/https')   **/ https
+  /** @type {import('N/runtime')} **/ runtime,
+  /** @type {import('N/https')}   **/ https
 ) {
   // GOTCHA -- configure these to files in your File Cabinet
   const LOGO_URL        = 'http://via.placeholder.com/800x300?text=Please configure your logo',

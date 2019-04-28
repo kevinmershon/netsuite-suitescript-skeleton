@@ -5,9 +5,9 @@
  * @NApiVersion 2.0
  */
 define(['N/redirect', 'N/task', 'N/log'], function(
-  /** @type import('N/redirect') **/ redirect,
-  /** @type import('N/task') **/ task,
-  /** @type import('N/log') **/ log
+  /** @type {import('N/redirect')} **/ redirect,
+  /** @type {import('N/task')}     **/ task,
+  /** @type {import('N/log')}      **/ log
 ) {
 
   function scheduleJob(opts) {

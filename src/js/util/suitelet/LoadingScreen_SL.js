@@ -6,9 +6,9 @@
  * @NScriptType Suitelet
  */
 define(['N/redirect', 'N/ui/serverWidget', 'N/task'], function(
-  /** @type import('N/redirect')        **/ redirect,
-  /** @type import('N/ui/serverWidget') **/ ui,
-  /** @type import('N/task')            **/ task
+  /** @type {import('N/redirect')}        **/ redirect,
+  /** @type {import('N/ui/serverWidget')} **/ ui,
+  /** @type {import('N/task')}            **/ task
 ) {
 
   function renderPage(context) {
