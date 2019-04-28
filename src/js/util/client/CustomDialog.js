@@ -4,7 +4,7 @@
  * @NApiVersion 2.0
  */
 define(['N/ui/dialog'], function(
-  /** @type import('N/ui/dialog') **/ dialog
+  /** @type {import('N/ui/dialog')} **/ dialog
 ) {
 
   function showCustomDialog(title, contents) {
@@ -25,16 +25,15 @@ define(['N/ui/dialog'], function(
     jQuery('div.uir-message-popup').prepend(jQuery(contents));
     jQuery('div.x-window').css('width', 'auto');
 
-    jQuery('div.x-window').css({
-      top:    '50%',
-      left:   '50%',
-      margin: '-'+(jQuery('div.x-window').height() / 2)+'px 0 0 -'+(jQuery('div.x-window').width() / 2)+'px'
-    });
+    // vertically-center the dialog
+    var xWindow = jQuery('div.x-window');
+    var newTop = (parseFloat(xWindow.css('top')) - ((xWindow.height()-300) / 2))+'px';
+    xWindow.css({ top: newTop });
 
     return promise;
   }
 
-  function makeInputFieldLine(label, id, required) {
+  function makeInputFieldLine(label, autoCompleteRole, id, required) {
     const fieldDiv = document.createElement('div');
     fieldDiv.className = 'uir-field-wrapper';
 
@@ -56,10 +55,12 @@ define(['N/ui/dialog'], function(
     inputSpan.append(inputSpanInner);
 
     const input = document.createElement('input');
-    input.size      = 30;
+    input.id           = id;
+    input.size         = 30;
+    input.autocomplete = autoCompleteRole;
     // @ts-ignore
-    input.style     = 'width: 420px';
-    input.className = 'input';
+    input.style        = 'width: 420px';
+    input.className    = 'input';
     inputSpanInner.append(input);
 
     fieldDiv.append(labelSpan);
@@ -80,34 +81,9 @@ define(['N/ui/dialog'], function(
     return row;
   }
 
-  function showAddressDialog(onSave, onCancel) {
-    const table = document.createElement('table');
-    table.className = 'table_fields';
-
-    table.append(makeInputFieldLine('Country',   'custpage_shipcountry', true));
-
-    table.append(makeInputFieldLine('Attention', 'custpage_shipattention'));
-    table.append(makeInputFieldLine('Addressee', 'custpage_shipaddressee'));
-    table.append(makeInputFieldLine('Address 1', 'custpage_shipaddress1'));
-    table.append(makeInputFieldLine('Address 2', 'custpage_shipaddress2'));
-    table.append(makeInputFieldLine('Address 3', 'custpage_shipaddress3'));
-    table.append(makeInputFieldLine('City',      'custpage_shipcity'));
-    table.append(makeInputFieldLine('State',     'custpage_shipstate'));
-    table.append(makeInputFieldLine('Zip',       'custpage_shipzip'));
-
-    showCustomDialog('Shipping Address', table).then(function(result) {
-      if (result === 'save') {
-        onSave();
-      } else {
-        onCancel();
-      }
-    });
-  }
-
-  showAddressDialog(function() { window.console.log('saved'); }, function() { window.console.log('canceled'); });
-
   return {
-    'showCustomDialog': showCustomDialog
+    'makeInputFieldLine': makeInputFieldLine,
+    'showCustomDialog':   showCustomDialog
   };
 
 });
