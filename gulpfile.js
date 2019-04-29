@@ -13,6 +13,10 @@ gulp.task('lint', function() {
                .pipe(eslint.format())
                .pipe(eslint.failAfterError());
 });
+const watchLint = function() {
+  gulp.watch(['lib/**', 'src/**'], gulp.series('lint'));
+}
+gulp.task('watch-lint', watchLint);
 
 gulp.task('mocha', function() {
   return gulp.src(['test/**/*.js'], { read: false })
