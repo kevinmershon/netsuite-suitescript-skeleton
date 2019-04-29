@@ -48,8 +48,7 @@ define(['N/runtime', 'N/https'], function(
       return;
     }
 
-    // @ts-ignore
-    const responseJSON = https.post({ url: window.location.href }).body;
+    const responseJSON = https.post({ url: window.location.href }).body; // eslint-disable-line
     if (responseJSON && responseJSON.length > 0) {
       const response = JSON.parse(responseJSON);
       if (response.status === 'COMPLETE' || response.status === 'FAILED') {
@@ -63,6 +62,12 @@ define(['N/runtime', 'N/https'], function(
     }
   }
 
+  /**
+   * context.currentRecord
+   * context.mode // [copy, paste, create]
+   *
+   * @type {import('N/types').EntryPoints.Client.pageInit}
+   */
   function pageInit(context) {
     // load the script deployment to get the parameter values
     addLoadingElementToPage();
@@ -72,7 +77,7 @@ define(['N/runtime', 'N/https'], function(
   }
 
   return {
-    pageInit: pageInit
+    'pageInit': pageInit
   };
 
 });

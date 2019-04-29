@@ -8,6 +8,9 @@ define(['N/https', 'N/log'], function(
   /** @type {import('N/log')}   **/ log
 ) {
 
+  /**
+   * @type {import('./Slack').post}
+   */
   function post(opts) {
     if (!opts.url) {
       log.error({

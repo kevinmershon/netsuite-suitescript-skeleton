@@ -7,6 +7,9 @@ define(['N/ui/dialog'], function(
   /** @type {import('N/ui/dialog')} **/ dialog
 ) {
 
+  /**
+   * @type {import('./CustomDialog').showCustomDialog}
+   */
   function showCustomDialog(title, contents) {
     // show the default alert dialog first
     const promise = dialog.create({
@@ -33,6 +36,9 @@ define(['N/ui/dialog'], function(
     return promise;
   }
 
+  /**
+   * @type {import('./CustomDialog').makeInputFieldLine}
+   */
   function makeInputFieldLine(label, autoCompleteRole, id, required) {
     const fieldDiv = document.createElement('div');
     fieldDiv.className = 'uir-field-wrapper';

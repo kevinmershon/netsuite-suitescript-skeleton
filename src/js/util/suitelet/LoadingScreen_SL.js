@@ -11,6 +11,9 @@ define(['N/redirect', 'N/ui/serverWidget', 'N/task'], function(
   /** @type {import('N/task')}            **/ task
 ) {
 
+  /**
+   * @param {import('N/types').EntryPoints.Suitelet.onRequestContext} context
+   */
   function renderPage(context) {
     const form = ui.createForm({ title: 'Loading...' });
 
@@ -28,6 +31,9 @@ define(['N/redirect', 'N/ui/serverWidget', 'N/task'], function(
     context.response.writePage(form);
   }
 
+  /**
+   * @param {import('N/types').EntryPoints.Suitelet.onRequestContext} context
+   */
   function checkProgress(context) {
     const summary = task.checkStatus({
       'taskId': context.request.parameters.custscript_taskid
@@ -37,6 +43,9 @@ define(['N/redirect', 'N/ui/serverWidget', 'N/task'], function(
     context.response.write('{"status": "' + summary.status + '"}');
   }
 
+  /**
+   * @param {import('N/types').EntryPoints.Suitelet.onRequestContext} context
+   */
   function maybeRedirectToRecord(context) {
     const summary = task.checkStatus({
       'taskId': context.request.parameters.custscript_taskid
@@ -52,6 +61,12 @@ define(['N/redirect', 'N/ui/serverWidget', 'N/task'], function(
     return false;
   }
 
+  /**
+   * context.request
+   * context.response
+   *
+   * @type {import('N/types').EntryPoints.Suitelet.onRequest}
+   */
   function onRequest(context) {
     if (context.request.method === 'GET') {
       if (!maybeRedirectToRecord(context)) {
@@ -63,7 +78,7 @@ define(['N/redirect', 'N/ui/serverWidget', 'N/task'], function(
   }
 
   return {
-    onRequest: onRequest
+    'onRequest': onRequest
   };
 
 });

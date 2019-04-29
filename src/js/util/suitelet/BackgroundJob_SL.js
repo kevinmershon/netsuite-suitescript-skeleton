@@ -10,6 +10,9 @@ define(['N/redirect', 'N/task', 'N/log'], function(
   /** @type {import('N/log')}      **/ log
 ) {
 
+  /**
+   * @type {import('./BackgroundJob').scheduleJob}
+   */
   function scheduleJob(opts) {
     log.audit({
       title: 'Scheduling Task',
@@ -37,7 +40,7 @@ define(['N/redirect', 'N/task', 'N/log'], function(
   }
 
   return {
-    scheduleJob: scheduleJob
+    'scheduleJob': scheduleJob
   };
 
 });
