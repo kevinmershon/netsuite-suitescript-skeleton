@@ -5,37 +5,34 @@ const mocha  = require('gulp-mocha');
 const log    = require('gulplog');
 const spawn  = require('child_process').spawn;
 const { promisify } = require('util');
-const exec = promisify(require('child_process').exec)
+const exec = promisify(require('child_process').exec);
 
 gulp.task('lint', function() {
-    return gulp.src('src/js/**/*.js')
-               .pipe(eslint())
-               .pipe(eslint.format())
-               .pipe(eslint.failAfterError());
+  return gulp.src('src/js/**/*.js')
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 const watchLint = function() {
   gulp.watch(['lib/**', 'src/**'], gulp.series('lint'));
-}
+};
 gulp.task('watch-lint', watchLint);
 
 gulp.task('mocha', function() {
   return gulp.src(['test/**/*.js'], { read: false })
-             .pipe(mocha({ reporter: 'list' }))
-             .on('error', function (err) {
-               //log.error(err.stack); // not super helpful
-             });
+    .pipe(mocha({ reporter: 'list' }));
 });
 
 const watchMocha = function() {
   gulp.watch(['lib/**', 'src/**', 'test/**'], gulp.series('lint', 'mocha'));
-}
+};
 gulp.task('watch-tests', watchMocha);
 gulp.task('test', gulp.series('lint', 'mocha'));
 
 function createScript(done) {
   var fs = require('fs');
   var scriptHeader;
-  fs.readFile("templates/_script_header.js", function(err, data) {
+  fs.readFile('templates/_script_header.js', function(err, data) {
     scriptHeader = data;
   });
 
@@ -46,7 +43,8 @@ function createScript(done) {
 
   var schema = {
     properties: {
-      Type: { required: true,
+      Type: {
+        required: true,
         message: 'client | mapreduce | restlet | scheduled | suitelet | userevent | workflow',
         pattern: /client|mapreduce|restlet|scheduled|suitelet|userevent|workflow/
       },
@@ -74,20 +72,20 @@ function createScript(done) {
     if (err) { return onErr(err); }
 
     var replace = require('gulp-batch-replace');
-    var rename  = require("gulp-rename");
+    var rename  = require('gulp-rename');
     var replaceThis = [
-        [ '{{ScriptHeader}}',   scriptHeader ],
-        [ '{{Company}}',        result.Company ],
-        [ '{{Name}}',           name],
-        [ '{{Email}}',          email],
-        [ '{{ScriptFileName}}', result.ScriptFileName ],
-        [ '{{ScriptTitle}}',    result.ScriptTitle ],
-        [ '{{ScriptID}}',       result.ScriptID ]
+      [ '{{ScriptHeader}}',   scriptHeader ],
+      [ '{{Company}}',        result.Company ],
+      [ '{{Name}}',           name],
+      [ '{{Email}}',          email],
+      [ '{{ScriptFileName}}', result.ScriptFileName ],
+      [ '{{ScriptTitle}}',    result.ScriptTitle ],
+      [ '{{ScriptID}}',       result.ScriptID ]
     ];
     gulp.src('templates/'+result.Type+'_template.js')
-        .pipe(replace(replaceThis))
-        .pipe(rename(result.ScriptFileName))
-        .pipe(gulp.dest('src/js/'+result.Type+'/'));
+      .pipe(replace(replaceThis))
+      .pipe(rename(result.ScriptFileName))
+      .pipe(gulp.dest('src/js/'+result.Type+'/'));
 
     done();
   });
@@ -108,7 +106,7 @@ const del              = require('del');
 const prompter         = require('prompt');
 
 gulp.task('clean', () => {
-  del(".deploycache"); // wipe the Netsuite deploy cache
+  del('.deploycache'); // wipe the Netsuite deploy cache
   return del('dist/');
 });
 gulp.task('build', () => {
@@ -116,10 +114,10 @@ gulp.task('build', () => {
   filenames.forget('all');
   return merge(
     gulp
-    .src('src/js/**/*.js')
-    .pipe(changed(scriptDest))
-    .pipe(gulp.dest(scriptDest))
-    .pipe(filenames('files'))
+      .src('src/js/**/*.js')
+      .pipe(changed(scriptDest))
+      .pipe(gulp.dest(scriptDest))
+      .pipe(filenames('files'))
   );
 });
 
@@ -127,8 +125,8 @@ gulp.task('list-files', () => {
   filenames.forget('all');
   return merge(
     gulp
-    .src('src/js/**/*.js')
-    .pipe(filenames('files'))
+      .src('src/js/**/*.js')
+      .pipe(filenames('files'))
   );
 });
 
@@ -144,7 +142,7 @@ function runSDFCommand(envCred, typeFlag, scriptId) {
     case '--preview':
     case '--deploy':
       path = `/tmp/netsuite-${envCred.account}.zip`;
-      var doZip = spawn('zip', [
+      spawn('zip', [
         '-r', path,
         '.',
         '--exclude=*.git*',
@@ -238,7 +236,7 @@ function runSDFCommand(envCred, typeFlag, scriptId) {
     //}
   });
 
-  sdfcli.on('exit', function (code) {
+  sdfcli.on('exit', function (exitCode) {
     sdfcli.stdin.end();
   });
 }
@@ -249,7 +247,7 @@ function sdfcli(sdfArgs, done) {
   done();
 }
 
-function deploy(environment, sdfArgs, done) {
+function deploy(environment, sdfArgs, done, runForever) {
   var envCred = credentials[environment];
   prepareSDFCredentials(envCred);
 
@@ -265,7 +263,8 @@ function deploy(environment, sdfArgs, done) {
 
     let config = filenames.get('objects').length
       ? Object.assign(envCred, { environment, method: 'sdf', file: 'dist\\' })
-      : Object.assign(envCred, {
+      : Object.assign(envCred,
+        {
           environment,
           method: 'suitetalk',
           file: filenames.get('files', 'full'),
@@ -276,7 +275,9 @@ function deploy(environment, sdfArgs, done) {
     const uploadToNetsuite = require('netsuite-deploy/lib/index.js');
     return uploadToNetsuite(config).then(() => {
       done();
-      process.exit(0);
+      if (!runForever) {
+        process.exit(0);
+      }
     });
   }
 }
@@ -297,7 +298,8 @@ function fetch(environment, sdfArgs, done) {
 
     let config = filenames.get('objects').length
       ? Object.assign(envCred, { environment, method: 'sdf', file: 'dist\\' })
-      : Object.assign(envCred, {
+      : Object.assign(envCred,
+        {
           environment,
           method: 'suitetalk',
           file: filenames.get('files', 'full'),
@@ -316,8 +318,28 @@ function fetch(environment, sdfArgs, done) {
 // SDF args
 var sdfArgs = process.argv.slice(3);
 
-gulp.task('deploy-sandbox',    gulp.series(['lint', 'build'], (done) => { return deploy('sandbox', sdfArgs, done); }));
-gulp.task('pull-sandbox', gulp.series(['list-files'], (done) => { return fetch('sandbox', sdfArgs, done); }));
-gulp.task('deploy-production', gulp.series(['lint', 'build'], (done) => { return deploy('production', sdfArgs, done); }));
+var runForever = false;
+const doDeploy = function(type) {
+  var deployToNetSuite = function(done)  {
+    return deploy(type, sdfArgs, done, runForever);
+  };
+  return deployToNetSuite;
+};
+
+const watchDeploy = function(type) {
+  var watchAndDeploy = function() {
+    runForever = true;
+    gulp.watch(['lib/**', 'src/**'], gulp.series('deploy-'+type));
+  };
+  return watchAndDeploy;
+};
+
+gulp.task('deploy-sandbox',    gulp.series(['lint', 'build'], doDeploy('sandbox')));
+gulp.task('deploy-production', gulp.series(['lint', 'build'], doDeploy('production')));
+gulp.task('watch-deploy-sandbox',    watchDeploy('sandbox'));
+gulp.task('watch-deploy-production', watchDeploy('production'));
+
+gulp.task('pull-sandbox',    gulp.series(['list-files'], (done) => { return fetch('sandbox',    sdfArgs, done); }));
 gulp.task('pull-production', gulp.series(['list-files'], (done) => { return fetch('production', sdfArgs, done); }));
+
 gulp.task('sdf', gulp.series([], (done) => { return sdfcli(sdfArgs, done); }));
