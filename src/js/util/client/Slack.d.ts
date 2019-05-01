@@ -1,4 +1,4 @@
-import {ServerResponse} from 'N/https';
+import {ClientResponse, ServerResponse} from 'N/https';
 
 interface SlackOptions {
   url:       string,
@@ -9,5 +9,5 @@ interface SlackOptions {
 }
 
 export type Slack = {
-  function post(options: SlackOptions): ServerResponse;
+  function post(options: SlackOptions): ClientResponse | ServerResponse;
 }
