@@ -114,7 +114,7 @@ gulp.task('build', () => {
   filenames.forget('all');
   return merge(
     gulp
-      .src('src/js/**/*.js')
+      .src(['src/js/**/*.js', '!src/js/_references.js'])
       .pipe(changed(scriptDest))
       .pipe(gulp.dest(scriptDest))
       .pipe(filenames('files'))
@@ -125,7 +125,7 @@ gulp.task('list-files', () => {
   filenames.forget('all');
   return merge(
     gulp
-      .src('src/js/**/*.js')
+      .src(['src/js/**/*.js', '!src/js/_references.js'])
       .pipe(filenames('files'))
   );
 });
