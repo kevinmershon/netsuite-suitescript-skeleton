@@ -63,6 +63,10 @@ define(['N/search'], function(
     return output;
   }
 
+  function truncateTo(str, maxLength) {
+    return str.substring(0, Math.min(str.length, maxLength));
+  }
+
   function getAllFields(nsRecord) {
     const values = {};
     const recordFields = nsRecord.getFields();
@@ -117,6 +121,7 @@ define(['N/search'], function(
     'merge':                 merge,
     'selectKeys':            selectKeys,
     'stripEmpties':          stripEmpties,
+    'truncateTo':            truncateTo,
     'getAllFields':          getAllFields,
     'getCustomListIdByName': getCustomListIdByName
   };
