@@ -54,6 +54,7 @@
   'use strict';
   var method = {};
 
+  /** @type {import('./Spec').Enumeration} **/
   method.Enumeration = function(permissableValues) {
     return {
       'description': 'String of value ' + JSON.stringify(permissableValues),
@@ -63,6 +64,7 @@
     };
   };
 
+  /** @type {import('./Spec').Boolean} **/
   method.Boolean = function() {
     return {
       'description': 'Boolean',
@@ -82,10 +84,12 @@
     };
   };
 
+  /** @type {import('./Spec').isFinite} **/
   function isFinite(val) {
     return !isNaN(val) && val !== -Infinity && val !== Infinity;
   }
 
+  /** @type {import('./Spec').Number} **/
   method.Number = function() {
     return {
       'description': 'Number',
@@ -102,6 +106,7 @@
     };
   };
 
+  /** @type {import('./Spec').Array} **/
   method.Array = function() {
     return {
       'description': 'Array',
@@ -115,6 +120,7 @@
     };
   };
 
+  /** @type {import('./Spec').ArrayOfSpec} **/
   method.ArrayOfSpec = function(subSpecification) {
     return {
       'description': 'Array',
@@ -162,6 +168,7 @@
   };
 
 
+  /** @type {import('./Spec').Object} **/
   method.Object = function() {
     return {
       'description': 'Object',
@@ -175,6 +182,7 @@
     };
   };
 
+  /** @type {import('./Spec').ObjectOfSpec} **/
   method.ObjectOfSpec = function(subSpecification) {
     return {
       'description': 'Object',
@@ -189,6 +197,7 @@
     };
   };
 
+  /** @type {import('./Spec').String} **/
   method.String = function() {
     return {
       'description': 'String',
@@ -202,6 +211,7 @@
     };
   };
 
+  /** @type {import('./Spec').Specification} **/
   method.Specification = function(properties) {
     var requiredProperties = Object.keys(properties);
     return {
