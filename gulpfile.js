@@ -172,22 +172,6 @@ function runSDFCommand(envCred, typeFlag, scriptId) {
               '-p',       path,
               '-url',     'system.netsuite.com'];
       break;
-    case '--workflow':
-      type = 'workflow'; destFolder = '/Objects';
-      args = ['importobjects',
-              '-scriptid',          scriptId,
-              '-type',              type,
-              '-p',                 path,
-              '-destinationfolder', destFolder];
-      break;
-    case '--savedsearch':
-      type = 'savedsearch'; destFolder = '/Objects';
-      args = ['importobjects',
-              '-scriptid',          scriptId,
-              '-type',              type,
-              '-p',                 path,
-              '-destinationfolder', destFolder];
-      break;
     case '--deploy':
       args = ['deploy',
               '-account', envCred.account,
