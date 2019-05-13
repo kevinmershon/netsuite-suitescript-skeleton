@@ -16,9 +16,9 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@hitc/netsuite-types@^2019.1.3":
-  version "2019.1.3"
-  resolved "https://registry.yarnpkg.com/@hitc/netsuite-types/-/netsuite-types-2019.1.3.tgz#86a1e28fd69166f4fc0ef43113311221458c4003"
+"@hitc/netsuite-types@^2019.1.5":
+  version "2019.1.5"
+  resolved "https://registry.yarnpkg.com/@hitc/netsuite-types/-/netsuite-types-2019.1.5.tgz#3648978bc10f0bf38531f3277c4c878b1b27acd9"
 
 "@types/jquery@^3.3.29":
   version "3.3.29"
