@@ -14,9 +14,9 @@
   },
 
   "rules": {
-    "tsc/config": [1, { configFile: ".tsconfig.json" }],
+    "tsc/config": [1, { "configFile": ".tsconfig.json" }],
 
-    brace-style: ["error", "1tbs", { "allowSingleLine": true }],
+    "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
     "indent": [
       "warn",
        2,
