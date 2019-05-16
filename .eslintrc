@@ -34,6 +34,7 @@
     "no-unused-vars":          ["error", "local"],
     "no-label-var":            ["error"],
     "keyword-spacing":         ["error", { "before": true, "after": true }],
+    "key-spacing":             ["warn",  { "align": "value" }],
     "no-irregular-whitespace": ["error", {}],
     "no-trailing-spaces":      ["error", {}],
     "object-curly-spacing":    ["error", "always"],
